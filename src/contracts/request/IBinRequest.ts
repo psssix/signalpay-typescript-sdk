@@ -1,3 +1,3 @@
 export interface IBinRequest {
-    Bin: string;
+  Bin: string;
 }

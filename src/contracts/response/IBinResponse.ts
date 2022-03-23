@@ -1,3 +1,3 @@
 export interface IBinResponse {
-    network: string;
+  network: string;
 }

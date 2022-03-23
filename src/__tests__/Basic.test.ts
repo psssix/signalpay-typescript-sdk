@@ -1,5 +1,5 @@
-import { ApiClient }  from "../index";
+import { ApiClient } from "../index";
 
 test("ApiService", () => {
-    expect(new ApiClient("test")).toBeInstanceOf(ApiClient);
-})
+  expect(new ApiClient("test")).toBeInstanceOf(ApiClient);
+});
