@@ -15,20 +15,20 @@ export class ApiClient {
   constructor(baseUri: string) {
     this.BaseUri = baseUri;
     this.XCorrelationId = this.uuidv4();
-      const _self = this;
-      setTimeout(() => {
-        Fingerprint2.get((components) => {
-          const values = components.map((component) => {
-            return component.value;
-          });
-          _self.Fingerprint = Fingerprint2.x64hash128(values.join(""), 31);
+    const _self = this;
+    setTimeout(() => {
+      Fingerprint2.get(components => {
+        const values = components.map(component => {
+          return component.value;
         });
-      }, 500);
+        _self.Fingerprint = Fingerprint2.x64hash128(values.join(""), 31);
+      });
+    }, 500);
   }
 
   public getPublicKey = (siteId: string): Promise<IPublicKeyResponse> => {
     return this.sendGetRequest<IPublicKeyResponse>("payments/public/key", {
-      siteId,
+      siteId
     });
   };
 
@@ -45,7 +45,9 @@ export class ApiClient {
     );
   };
 
-  public cryptoAuth = (request: ICryptoPaymentRequest): Promise<IAuthResponse> => {
+  public cryptoAuth = (
+    request: ICryptoPaymentRequest
+  ): Promise<IAuthResponse> => {
     request.browserFingerPrint = this.Fingerprint!;
     return this.sendPostRequest<IAuthResponse>(
       "payments/cryptogram/auth",
@@ -53,7 +55,9 @@ export class ApiClient {
     );
   };
 
-  public cryptoCharge = (request: ICryptoPaymentRequest): Promise<IAuthResponse> => {
+  public cryptoCharge = (
+    request: ICryptoPaymentRequest
+  ): Promise<IAuthResponse> => {
     request.browserFingerPrint = this.Fingerprint!;
     return this.sendPostRequest<IAuthResponse>(
       "payments/cryptogram/charge",
@@ -66,7 +70,8 @@ export class ApiClient {
   ): Promise<IPaymentMethodsResponse> => {
     return this.sendPostRequest<IPaymentMethodsResponse>(
       "payments/public/methods",
-      { siteId }, true
+      { siteId },
+      true
     );
   };
 
@@ -125,7 +130,7 @@ export class ApiClient {
         ) {
           resolve(response);
         } else {
-          if (xhr.status >= 200 && xhr.status < 300 && ignoreActionResult){
+          if (xhr.status >= 200 && xhr.status < 300 && ignoreActionResult) {
             resolve(response);
           }
           if (xhr.status > 200 && xhr.status >= 300) {
@@ -148,23 +153,26 @@ export class ApiClient {
     }
   };
 
-
   private uuidv4 = () => {
     if ("crypto" in window && typeof crypto.getRandomValues === "function") {
       // tslint:disable-next-line: no-eval
-      return eval("[1e7]+[-1e3]+[-4e3]+[-8e3]+[-1e11]").replace(/[018]/g, (c: number) =>
-      // tslint:disable-next-line: no-bitwise
-      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      return eval("[1e7]+[-1e3]+[-4e3]+[-8e3]+[-1e11]").replace(
+        /[018]/g,
+        (c: number) =>
+          // tslint:disable-next-line: no-bitwise
+          (
+            c ^
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+          ).toString(16)
       );
     }
 
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
       // tslint:disable-next-line: no-bitwise
-      const r = Math.random() * 16 | 0;
+      const r = (Math.random() * 16) | 0;
       // tslint:disable-next-line: no-bitwise
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      const v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-    
-  }
+  };
 }

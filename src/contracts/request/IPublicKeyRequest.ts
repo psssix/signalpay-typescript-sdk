@@ -1,3 +1,3 @@
 export interface IPublicKeyRequest {
-    ReceiverId: string;
+  ReceiverId: string;
 }
