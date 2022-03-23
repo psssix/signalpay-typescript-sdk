@@ -8,14 +8,14 @@ Client that allows you to interact with Signal Pay Api in a few lines of code.
 Install client with command.
 
 ```sh
-$ npm i signalpay-api-client@latest
+$ npm i signalpay-typescript-sdk@latest
 ```
 
 
 ### Development
 Just import:
 ```code
-import {ApiClient} from "signalpay-api-client";
+import {ApiClient} from "signalpay-typescript-sdk";
 ```
 And initialize with baseUrl:
 ```code

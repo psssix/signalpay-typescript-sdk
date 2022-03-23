@@ -1,5 +1,5 @@
 {
-  "name": "signalpay-api-client",
+  "name": "signalpay-typescript-sdk",
   "version": "1.1.4",
   "description": "Signal Pay API Client",
   "main": "lib/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onemantooo/signalpay-api-client.git"
+    "url": "git+https://github.com/psssix/signalpay-typescript-sdk.git"
   },
   "keywords": [
     "Signal Pay"
