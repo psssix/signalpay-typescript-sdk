@@ -1,8 +1,8 @@
-# Signal Pay Api client
+# SignalPay TypeScript SDK
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Client that allows you to interact with Signal Pay Api in a few lines of code.
+Client that allows you to interact with SignalPay API in a few lines of code.
 
 ### Installation
 Install client with command.
